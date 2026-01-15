@@ -5,3 +5,5 @@ fiverr_api.egg-info/
 env.py
 fiverr_api/scrapers
 /env
+/output
+/gigs_data
