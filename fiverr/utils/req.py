@@ -3,7 +3,7 @@ import re
 import requests
 from bs4 import BeautifulSoup
 
-from fiverr_api.utils.scrape_utils import get_perseus_initial_props
+from fiverr.utils.scrape_utils import get_perseus_initial_props
 
 SCRAPER_API_URL = "https://api.scraperapi.com/"
 SCRAPER_API_REF = "https://www.scraperapi.com/?fp_ref=enable-fiverr-api"

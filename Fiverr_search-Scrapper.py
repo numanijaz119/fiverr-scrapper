@@ -1,12 +1,3 @@
-"""
-Fiverr Search Scraper - FIXED VERSION
-Updated with CORRECT data paths from actual Fiverr JSON response
-
-KEY FIXES:
-- Packages: packages.packageList[] (not packages.packages[])
-- Description: description.content (not aboutGig.sections[])
-"""
-
 import json
 import argparse
 import sys
@@ -15,7 +6,7 @@ import re
 import time
 from pathlib import Path
 from urllib.parse import quote_plus
-from fiverr_api import session
+from fiverr import session
 
 try:
     from dotenv import load_dotenv

@@ -7,3 +7,6 @@ fiverr_api/scrapers
 /env
 /output
 /gigs_data
+__pycache__/
+*.pyc
+keyword_analysis/
