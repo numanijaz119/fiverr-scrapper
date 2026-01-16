@@ -21,26 +21,23 @@ A Python-based web scraping tool for collecting and analyzing Fiverr gig data. T
 
 ## 📋 Project Structure
 
-```
-.
-├── Fiverr_search-Scrapper.py      # Main scraper script
-├── Analyze_gig.py                 # Legacy analysis utilities
-├── analyze_keyword.py             # Keyword market research & consolidation
-├── requirements.txt               # Python dependencies
-├── fiverr/                        # Custom Fiverr API module
-│   ├── __init__.py                # Session export
-│   └── utils/
-│       ├── __init__.py            # Utilities package
-│       ├── req.py                 # Request handling & session management
-│       └── scrape_utils.py        # HTML parsing utilities
-├── gigs_data/                     # Scraped gig data (JSON files by keyword)
-├── output/                        # Generated reports
-│   ├── gigs.html                  # HTML report
-│   └── gigs.json                  # Aggregated JSON data
-├── .env                           # Environment variables (optional)
-├── .git/                          # Git repository
-└── env/                           # Python virtual environment
-```
+├── Fiverr_search-Scrapper.py # Main scraper script
+├── Analyze_gig.py # Legacy analysis utilities
+├── analyze_keyword.py # Keyword market research & consolidation
+├── requirements.txt # Python dependencies
+├── fiverr/ # Custom Fiverr API module
+│ ├── **init**.py # Session export
+│ └── utils/
+│ ├── **init**.py # Utilities package
+│ ├── req.py # Request handling & session management
+│ └── scrape_utils.py # HTML parsing utilities
+├── gigs_data/ # Scraped gig data (JSON files by keyword)
+├── output/ # Generated reports
+│ ├── gigs.html # HTML report
+│ └── gigs.json # Aggregated JSON data
+├── .env # Environment variables
+├── .git/ # Git repository
+└── env/ # Python virtual environment
 
 ## 🛠️ Installation
 
@@ -75,6 +72,7 @@ The `fiverr/` package provides a custom API layer for scraping Fiverr:
    ```
 
 3. **Install dependencies**
+
    ```bash
    pip install -r requirements.txt
    ```
@@ -277,6 +275,7 @@ python analyze_keyword.py "gigs_data/python automation"
    - Clear `gigs_data/` and rescrape
 
 3. **Encoding Issues**
+
    - Ensure UTF-8 encoding is used
    - Update beautifulsoup4 and html5lib
 

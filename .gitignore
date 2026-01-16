@@ -10,3 +10,4 @@ fiverr_api/scrapers
 __pycache__/
 *.pyc
 keyword_analysis/
+.env
