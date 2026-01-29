@@ -43,22 +43,16 @@ def extract_gig_data(gig):
     
     seller_data = {
         'username': seller_info.get('username', '') or preview_data.get('seller_name', ''),
-        'display_name': seller_info.get('display_name', ''),
         'seller_id': seller_info.get('seller_id', ''),
         'seller_level': seller_level,  # Now gets it from preview_data first!
         'rating': rating,
         'ratings_count': rating_count,
-        'completed_orders': seller_info.get('completed_orders', 0),
         'is_pro': seller_info.get('is_pro', False),
         'country': seller_info.get('country', '') or seller_info.get('country_code', '') or preview_data.get('seller_country', ''),
         'member_since': seller_info.get('member_since', ''),
         'response_time': seller_info.get('response_time', 0),
-        'languages': [lang.get('code', '') for lang in seller_info.get('languages', [])],
         'one_liner': seller_info.get('one_liner', ''),
-        'description': seller_desc_plain,
-        'certifications_count': len(seller_info.get('certifications', [])),
-        'education_count': len(seller_info.get('education', [])),
-        'portfolio_count': seller_info.get('portfolios', {}).get('totalCount', 0)
+        'description': seller_desc_plain
     }
     
     # === GIG INFORMATION ===
@@ -157,22 +151,15 @@ def extract_gig_data(gig):
     
     # === REVIEWS SUMMARY ===
     reviews = gig.get('reviews', {})
+    breakdown = reviews.get('breakdown', [])
+    simplified_breakdown = {str(item.get('average_valuation_value')): item.get('count', 0) for item in breakdown}
+    
     reviews_data = {
         'rating': reviews.get('rating', 0),
         'reviews_count': reviews.get('reviews_count', 0),
-        'star_breakdown': reviews.get('breakdown', []),
+        'star_breakdown': simplified_breakdown,
         'star_summary': reviews.get('star_summary', {})
     }
-    
-    # === FAQS ===
-    faqs = gig.get('faqs', [])
-    faqs_data = [
-        {
-            'question': faq.get('question', ''),
-            'answer': faq.get('answer', '')
-        }
-        for faq in faqs
-    ]
     
     # === GALLERY - SIMPLIFIED ===
     gallery = gig.get('gallery', [])
@@ -229,7 +216,6 @@ def extract_gig_data(gig):
         'packages': packages_data,
         'pricing': pricing_data,
         'reviews': reviews_data,
-        'faqs': faqs_data,
         'gallery': gallery_data,
         'metadata': metadata_data,
         'preview_data': preview_data,
