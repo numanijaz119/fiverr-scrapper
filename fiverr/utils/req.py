@@ -23,38 +23,21 @@ class ScraperApiQuotaError(ScraperApiError):
     """Raised when the monthly request quota has been exhausted."""
 
 
-# Body fragments ScraperAPI returns on various error conditions
-_QUOTA_PHRASES = [
-    "exceeded your monthly api call limit",
-    "exceeded your monthly limit",
-    "you have used all",
-    "request limit reached",
-    "concurrent request limit",
-]
-_KEY_PHRASES = [
-    "invalid api key",
-    "api key is not valid",
-    "unauthorized",
-    "account suspended",
-    "account is banned",
-]
-
-
 def _check_scraper_api_response(response: 'requests.Response'):
     """
     Inspect the ScraperAPI response and raise a descriptive exception when
-    an API-level error is detected (not a Fiverr-side error).
+    an API-level error is detected.  We rely only on HTTP status codes —
+    body-text matching produces false positives against normal Fiverr content.
     """
     status = response.status_code
-    body   = response.text.lower()
 
-    if status == 401 or any(p in body for p in _KEY_PHRASES):
+    if status == 401:
         raise ScraperApiKeyError(
             "ScraperAPI key is invalid or the account is suspended. "
             "Check your key in Settings."
         )
 
-    if status == 403 or any(p in body for p in _QUOTA_PHRASES):
+    if status == 403:
         raise ScraperApiQuotaError(
             "ScraperAPI monthly quota has been used up. "
             "Upgrade your plan or wait for the next billing cycle."
